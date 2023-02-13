@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sorteio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
+        <style>
+            * {
+                border-width: 0;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                height: 100%;
+            }
+
+            body {
+                align-items: center;
+                display: flex;
+                font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                font-weight: 400;
+                justify-content: center;
+                min-height: 100%;
+                padding: 0.5rem;
+            }
+
+            div {
+                margin: 0 auto;
+                max-width: 30rem;
+                width: 100%;
+            }
+
+            p {
+                text-align: center;
+            }
+
+            h1 {
+                font-family: "Roboto Mono", Courier, monospace;
+                font-size: 10rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                text-align: center;
+            }
+
+            button {
+                background-color: hsl(0, 0%, 33.33%);
+                border-radius: 6px;
+                color: #fff;
+                cursor: pointer;
+                display: block;
+                font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                font-size: 1.5rem;
+                font-weight: 500;
+                letter-spacing: 1px;
+                margin-bottom: 0.5rem;
+                padding: 1rem;
+                text-align: center;
+                text-transform: uppercase;
+                transition: background-color 200ms linear;
+                width: 100%;
+            }
+
+            button:hover {
+                background-color: hsl(0, 0%, 44.44%);
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p>Sorteie um número entre 1 e 100:</p>
+            <h1 id="number">0</h1>
+            <button>Iniciar</button>
+            <button>Parar</button>
+            <button>Resetar</button>
+        </div>
+        <script>
+            "use strict";
+
+            const number = document.getElementById("number");
+            const buttons = document.getElementsByTagName("button");
+            let intervalId;
+
+            /*const storage = showStorage();
+            if (storage.number) {
+                number.innerText = storage.number;
+            }
+
+            const createStorage = function (obj) {
+                localStorage.setItem("data", JSON.stringify(obj));
+            };
+
+            const showStorage = function() {
+                const data = localStorage.getItem("data");
+                return JSON.parse(data);
+            };
+
+            const destroyStorage = function() {
+                localStorage.clear();
+            };*/
+
+            const randomNaturalNumber = function(max = 10) {
+                return Math.floor(Math.random() * max);
+            };
+
+            const startDraw = function() {
+                if (!intervalId) {
+                    intervalId = setInterval(function() {
+                        number.innerText = randomNaturalNumber(100) + 1;
+                    }, 100);
+                }
+            };
+
+            const stopDraw = function() {
+                clearInterval(intervalId);
+                intervalId = null;
+            };
+
+            buttons[0].addEventListener("click", function() {
+                startDraw();
+            });
+
+            buttons[1].addEventListener("click", function() {
+                stopDraw();
+            });
+
+            buttons[2].addEventListener("click", function() {
+                stopDraw();
+                number.innerText = 0;
+            });
+        </script>
+    </body>
+</html>
